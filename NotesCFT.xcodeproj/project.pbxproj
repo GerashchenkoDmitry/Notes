@@ -13,6 +13,12 @@
 		DF4F45FE2705AB9F00F3EBFE /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DF4F45FD2705AB9F00F3EBFE /* Preview Assets.xcassets */; };
 		DF4F46002705AB9F00F3EBFE /* Persistence.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F45FF2705AB9F00F3EBFE /* Persistence.swift */; };
 		DF4F46032705AB9F00F3EBFE /* NotesCFT.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DF4F46012705AB9F00F3EBFE /* NotesCFT.xcdatamodeld */; };
+		DF4F460D2705AD3000F3EBFE /* Note+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F460B2705AD3000F3EBFE /* Note+CoreDataClass.swift */; };
+		DF4F460E2705AD3000F3EBFE /* Note+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F460C2705AD3000F3EBFE /* Note+CoreDataProperties.swift */; };
+		DF4F46112705B3E400F3EBFE /* NewNoteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F46102705B3E400F3EBFE /* NewNoteView.swift */; };
+		DF4F46152705E6FD00F3EBFE /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F46142705E6FD00F3EBFE /* Extensions.swift */; };
+		DF4F46182705EA2200F3EBFE /* NoteDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F46172705EA2200F3EBFE /* NoteDetailView.swift */; };
+		DF4F461C270A1B8000F3EBFE /* MultilineTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = DF4F461B270A1B8000F3EBFE /* MultilineTextField.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +30,12 @@
 		DF4F45FF2705AB9F00F3EBFE /* Persistence.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistence.swift; sourceTree = "<group>"; };
 		DF4F46022705AB9F00F3EBFE /* NotesCFT.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = NotesCFT.xcdatamodel; sourceTree = "<group>"; };
 		DF4F46042705AB9F00F3EBFE /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DF4F460B2705AD3000F3EBFE /* Note+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		DF4F460C2705AD3000F3EBFE /* Note+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Note+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		DF4F46102705B3E400F3EBFE /* NewNoteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewNoteView.swift; sourceTree = "<group>"; };
+		DF4F46142705E6FD00F3EBFE /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		DF4F46172705EA2200F3EBFE /* NoteDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoteDetailView.swift; sourceTree = "<group>"; };
+		DF4F461B270A1B8000F3EBFE /* MultilineTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultilineTextField.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,8 +68,14 @@
 		DF4F45F52705AB9900F3EBFE /* NotesCFT */ = {
 			isa = PBXGroup;
 			children = (
+				DF4F460B2705AD3000F3EBFE /* Note+CoreDataClass.swift */,
+				DF4F460C2705AD3000F3EBFE /* Note+CoreDataProperties.swift */,
 				DF4F45F62705AB9900F3EBFE /* NotesCFTApp.swift */,
 				DF4F45F82705AB9900F3EBFE /* ContentView.swift */,
+				DF4F46102705B3E400F3EBFE /* NewNoteView.swift */,
+				DF4F46172705EA2200F3EBFE /* NoteDetailView.swift */,
+				DF4F461B270A1B8000F3EBFE /* MultilineTextField.swift */,
+				DF4F46142705E6FD00F3EBFE /* Extensions.swift */,
 				DF4F45FA2705AB9F00F3EBFE /* Assets.xcassets */,
 				DF4F45FF2705AB9F00F3EBFE /* Persistence.swift */,
 				DF4F46042705AB9F00F3EBFE /* Info.plist */,
@@ -144,10 +162,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DF4F46182705EA2200F3EBFE /* NoteDetailView.swift in Sources */,
+				DF4F461C270A1B8000F3EBFE /* MultilineTextField.swift in Sources */,
 				DF4F46002705AB9F00F3EBFE /* Persistence.swift in Sources */,
 				DF4F45F92705AB9900F3EBFE /* ContentView.swift in Sources */,
+				DF4F460D2705AD3000F3EBFE /* Note+CoreDataClass.swift in Sources */,
+				DF4F46152705E6FD00F3EBFE /* Extensions.swift in Sources */,
 				DF4F45F72705AB9900F3EBFE /* NotesCFTApp.swift in Sources */,
 				DF4F46032705AB9F00F3EBFE /* NotesCFT.xcdatamodeld in Sources */,
+				DF4F46112705B3E400F3EBFE /* NewNoteView.swift in Sources */,
+				DF4F460E2705AD3000F3EBFE /* Note+CoreDataProperties.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,72 +9,91 @@ import SwiftUI
 import CoreData
 
 struct ContentView: View {
-    @Environment(\.managedObjectContext) private var viewContext
-
-    @FetchRequest(
-        sortDescriptors: [NSSortDescriptor(keyPath: \Item.timestamp, ascending: true)],
-        animation: .default)
-    private var items: FetchedResults<Item>
-
-    var body: some View {
-        List {
-            ForEach(items) { item in
-                Text("Item at \(item.timestamp!, formatter: itemFormatter)")
+  
+  @Environment(\.managedObjectContext) private var moc
+  
+  @FetchRequest(
+    entity: Note.entity(),
+    sortDescriptors: [NSSortDescriptor(keyPath: \Note.date, ascending: true)],
+    animation: .default
+  )
+  
+  private var notes: FetchedResults<Note>
+ 
+  @State private var showingAddScreen = false
+  
+  var body: some View {
+    NavigationView {
+      List {
+        ForEach(notes, id: \.self) { note in
+          NavigationLink(destination: NoteDetailView(note: note)) {
+            VStack(alignment: .leading) {
+              
+              Text("\(note.title ?? "Unknown title")")
+                .fontWeight(.bold)
+                .lineLimit(1)
+              
+              HStack {
+                Text("\(note.date ?? Date(), formatter: noteDateFormatter)")
+                
+                Text(note.noteText ?? "Unknown body text")
+                  .lineLimit(1)
+              }
             }
-            .onDelete(perform: deleteItems)
+          }
+          .onAppear {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
+              if note.title == "" && note.noteText == "" {
+                moc.delete(note)
+              }
+              try? moc.save()
+            }
+          }
         }
-        .toolbar {
-            #if os(iOS)
+        .onDelete(perform: deleteItems)
+      }
+      .listStyle(InsetGroupedListStyle())
+      .toolbar {
+        ToolbarItem(placement: .navigationBarTrailing) {
             EditButton()
-            #endif
-
-            Button(action: addItem) {
-                Label("Add Item", systemImage: "plus")
-            }
         }
-    }
-
-    private func addItem() {
-        withAnimation {
-            let newItem = Item(context: viewContext)
-            newItem.timestamp = Date()
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
+        
+        ToolbarItem(placement: .navigationBarLeading) {
+          Button(action: {
+            self.showingAddScreen.toggle()
+          }) {
+            Image(systemName: "plus")
+          }
         }
+      }
+      .navigationTitle("Notes")
+      .fullScreenCover(isPresented: $showingAddScreen, content: {
+        NewNoteView().environment(\.managedObjectContext, self.moc)
+      })
     }
-
-    private func deleteItems(offsets: IndexSet) {
-        withAnimation {
-            offsets.map { items[$0] }.forEach(viewContext.delete)
-
-            do {
-                try viewContext.save()
-            } catch {
-                // Replace this implementation with code to handle the error appropriately.
-                // fatalError() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development.
-                let nsError = error as NSError
-                fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
-            }
-        }
+  }
+  
+  private func deleteItems(offsets: IndexSet) {
+    withAnimation {
+      offsets.map { notes[$0] }.forEach(moc.delete)
+      do {
+        try moc.save()
+      } catch {
+        let nsError = error as NSError
+        fatalError("Unresolved error \(nsError), \(nsError.userInfo)")
+      }
     }
+  }
 }
 
-private let itemFormatter: DateFormatter = {
-    let formatter = DateFormatter()
-    formatter.dateStyle = .short
-    formatter.timeStyle = .medium
-    return formatter
+private let noteDateFormatter: DateFormatter = {
+  let formatter = DateFormatter()
+  formatter.dateStyle = .short
+  return formatter
 }()
 
 struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
-    }
+  static var previews: some View {
+    ContentView().environment(\.managedObjectContext, PersistenceController.preview.container.viewContext)
+  }
 }
